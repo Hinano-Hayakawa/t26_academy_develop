@@ -50,5 +50,27 @@ public class BookController {
 
         return "book/add";
     }
-    
+    @PostMapping("/book/add")
+
+public String addBook(
+
+        @Valid @ModelAttribute BookMstDto bookMstDto,
+        BindingResult bindingResult,
+        RedirectAttributes redirectAttributes,
+        Model model) {
+
+    // バリデーションエラー時
+    if (bindingResult.hasErrors()) {
+        model.addAttribute("bookMstDto", bookMstDto);
+        return "book/add";
+     }
+
+    // 保存処理
+    bookMstService.insert(bookMstDto);
+
+    // 一覧画面へリダイレクト
+    return "redirect:/book/index";
+
+}
+ 
 }

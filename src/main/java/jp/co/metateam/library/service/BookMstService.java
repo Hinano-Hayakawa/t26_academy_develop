@@ -42,8 +42,15 @@ public class BookMstService {
 
         return bookMstDtoList;
     }
+    @Transactional
+    public void insert(BookMstDto dto) {
     
-}
+     BookMst book = new BookMst();
+     book.setTitle(dto.getTitle());
+     book.setIsbn(dto.getIsbn());
 
+    bookMstRepository.save(book);
+}    
+}
 
 
